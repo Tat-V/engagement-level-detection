@@ -30,7 +30,7 @@ def upload_file():
             flash('File is not chosen')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            # filename = secure_filename(file.filename)
+            os.mkdir(UPLOAD_FOLDER)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'video.mp4'))
             return redirect(url_for('output_result'))
 
