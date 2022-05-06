@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Engagement analysis</title>
+        <style>
+           p {
+            background: #D9FFAD; /* Цвет фона под заголовком */
+            color: green; /* Цвет текста */
+            padding: 2px; /* Поля вокруг текста */
+           }
+        </style>
+    </head>
+    <body>
+        <form enctype="multipart/form-data" method="post">
+            <center>
+            <h1>Upload your video for engagement level detection</h1>
+                <style>
+                    input:focus {
+                    outline: none; /* Скрываем рамку */
+                    }
+                </style>
+            <br>
+            <br>
+            <input type="file" name="file" multiple accept="video/*,video/MP4">
+            <input type="submit" value="Submit">
+            </center>
+        </form>
+        <br>
+        <br>
+        <br>
+        <center><b><p>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+
+                    {% for message in messages %}
+                    <div class="alert alert-info">
+                    <strong></strong> {{ message[1] }}
+                    </div>
+
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </p></b></center>
+      <br>
+    </body>
+</html>
