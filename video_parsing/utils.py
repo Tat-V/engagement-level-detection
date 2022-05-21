@@ -1,10 +1,11 @@
-import cv2
 import os
 import shutil
 
+import cv2
+import numpy as np
+
 # from video_parsing.facial_analysis import FacialImageProcessing
 from tqdm import tqdm
-import numpy as np
 
 
 def images_from_video(video_path, img_height, img_width, img_dir):
@@ -13,7 +14,6 @@ def images_from_video(video_path, img_height, img_width, img_dir):
         os.mkdir(img_dir)
     except:
         True
-
 
     img_list = []
 
@@ -25,7 +25,7 @@ def images_from_video(video_path, img_height, img_width, img_dir):
         if success:
             image = cv2.resize(image, (img_height, img_width))
             img_list.append(image)
-            cv2.imwrite(os.path.join(img_dir, f'img_{i}.jpg'), image)
+            cv2.imwrite(os.path.join(img_dir, f"img_{i}.jpg"), image)
             # print(os.path.join(img_dir, f'img_{i}.png'), image)
             i += 1
         else:

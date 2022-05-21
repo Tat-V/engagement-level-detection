@@ -1,5 +1,6 @@
-import pathlib
 import glob
+import pathlib
+
 import cv2
 import numpy as np
 import tensorflow as tf
@@ -11,22 +12,48 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
-from tensorflow.keras.applications import (densenet, inception_resnet_v2,
-                                           inception_v3, mobilenet,
-                                           mobilenet_v2, resnet, resnet_v2,
-                                           vgg16)
+from tensorflow.keras.applications import (
+    densenet,
+    inception_resnet_v2,
+    inception_v3,
+    mobilenet,
+    mobilenet_v2,
+    resnet,
+    resnet_v2,
+    vgg16,
+)
 from tensorflow.keras.applications.resnet import preprocess_input
-from tensorflow.keras.callbacks import (Callback, CSVLogger, EarlyStopping,
-                                        ModelCheckpoint, TensorBoard)
-from tensorflow.keras.layers import (GRU, LSTM, Activation, BatchNormalization,
-                                     Conv2D, Conv3D, Dense, DepthwiseConv2D,
-                                     Dropout, Flatten, GlobalAveragePooling2D,
-                                     GlobalMaxPool2D, GlobalMaxPool3D, Input,
-                                     Masking, MaxPool2D, MaxPooling2D,
-                                     MaxPooling3D, Reshape, TimeDistributed)
+from tensorflow.keras.callbacks import (
+    Callback,
+    CSVLogger,
+    EarlyStopping,
+    ModelCheckpoint,
+    TensorBoard,
+)
+from tensorflow.keras.layers import (
+    GRU,
+    LSTM,
+    Activation,
+    BatchNormalization,
+    Conv2D,
+    Conv3D,
+    Dense,
+    DepthwiseConv2D,
+    Dropout,
+    Flatten,
+    GlobalAveragePooling2D,
+    GlobalMaxPool2D,
+    GlobalMaxPool3D,
+    Input,
+    Masking,
+    MaxPool2D,
+    MaxPooling2D,
+    MaxPooling3D,
+    Reshape,
+    TimeDistributed,
+)
 from tensorflow.keras.metrics import top_k_categorical_accuracy
-from tensorflow.keras.models import (Model, Sequential, load_model,
-                                     model_from_json)
+from tensorflow.keras.models import Model, Sequential, load_model, model_from_json
 from tensorflow.keras.optimizers import SGD, Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.regularizers import l2 as L2_reg
@@ -53,8 +80,8 @@ import requests
 from skimage import transform as trans
 from tqdm import tqdm
 
-from video_parsing import FacialImageProcessing
 from prediction.utils import *
+from video_parsing import FacialImageProcessing
 
 emotion_to_index = {
     "Angry": 0,
@@ -113,8 +140,8 @@ def predict_emotion(imgs_path, model=MODEL):
 
 def make_emotions_dataset(imgs_path=IMGS_PATH):
     preds_file = "../resources/prediction_answer.csv"
-    for i in glob.glob(imgs_path + '*.jpg'):
+    for i in glob.glob(imgs_path + "*.jpg"):
         scores = predict_emotion(i)
         if len(scores) != 0:
             with open(preds_file, "a+") as f:
-                f.write(','.join(map(str, scores)) + '\n')
+                f.write(",".join(map(str, scores)) + "\n")
